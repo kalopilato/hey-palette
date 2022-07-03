@@ -1,84 +1,95 @@
 import type { NextPage } from 'next'
+
+import nearestColor from '../lib/nearestColor'
+import { paletteObjectsGroupedByName } from '../lib/palette'
+import { toSentenceCase } from '../lib/stringUtils'
+
+import React from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
 const Home: NextPage = () => {
+  const [searchedColor, setSearchedColor] = React.useState('')
+  const [result, setResult] = React.useState(null)
+  const [validationError, setValidationError] = React.useState(null)
+
+  const onSearchChange = (e) => {
+    if(validationError) setValidationError(null)
+    if(result) setResult(null)
+    setSearchedColor(e.target.value)
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if(searchedColor === '') {
+      setValidationError('Maybe enter something first?')
+      return
+    }
+
+    try {
+      const searchResult = nearestColor(searchedColor)
+      setResult(nearestColor(searchedColor))
+    } catch (e) {
+      setValidationError('Nope. I know about HEX or RGB colors but not whatever that is')
+    }
+  }
+
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="min-h-screen">
       <Head>
-        <title>Create Next App</title>
+        <title>Hey Palette</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      <main className="flex flex-col items-center justify-center flex-1 w-full text-center">
+        <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 bg-white border-b">
+          <form className="block w-10/12" onSubmit={onSubmit}>
+            <label htmlFor="colorInput" className="block text-2xl font-bold text-gray-800">Hey Palette, what color is this?</label>
+            <input
+              id="colorInput"
+              type="text"
+              className="w-48 px-4 py-2 mt-2 text-center text-gray-700 border-2 border-gray-200 rounded focus:outline-none focus:border-gray-300"
+              autocomplete="off"
+              autoFocus
+              placeholder="Enter a color"
+              onChange={onSearchChange}
+            />
+            <div className="h-4 pt-2 mb-2 italic">
+              {validationError ? (
+                <span className="text-red-500">{validationError}</span>
+              ) : null}
+              {result ? (
+                <span className="font-semibold text-gray-700">{`Nearest color: "${result.name}". Distance: ${result.distance}`}</span>
+              ) : null}
+            </div>
+          </form>
+        </header>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="flex w-10/12 my-8">
+          <div className="flex flex-wrap justify-center w-full gap-x-16 gap-y-8">
+            { Object.entries(paletteObjectsGroupedByName).map(([groupName, group]) => (
+              <div className="w-48">
+                <h3 className="mb-2 text-lg font-semibold">{toSentenceCase(groupName)}</h3>
+                <ol>
+                  { Object.entries(group).map(([colorName, colorData]) => (
+                    <li
+                      className={`flex items-center p-1 border-2 rounded ${colorName === result?.name ? 'border-green-500 bg-green-100' : 'border-white'}`}
+                      title={colorData.description}
+                    >
+                      <div
+                        className="mr-8 rounded"
+                        style={{backgroundColor: colorData.value, width: '3rem', height: '2rem', border: '1px solid black'}}
+                      />
+                      <span>{colorName}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
     </div>
   )
 }
