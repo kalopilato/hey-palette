@@ -31,7 +31,7 @@ const Home: NextPage = () => {
       const searchResult = nearestColor(searchedColor)
       setResult(nearestColor(searchedColor))
     } catch (e) {
-      setValidationError('Nope. I know about HEX or RGB colors but not whatever that is')
+      setValidationError('I only know about HEX or RGB colors sorry!')
     }
   }
 
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className="flex flex-col items-center justify-center flex-1 w-full text-center">
-        <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 bg-white border-b">
+        <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 mt-4 bg-white border-b">
           <form className="block w-10/12" onSubmit={onSubmit}>
             <label htmlFor="colorInput" className="block text-2xl font-bold text-gray-800">Hey Palette, what color is this?</label>
             <input
@@ -74,7 +74,8 @@ const Home: NextPage = () => {
                 <ol>
                   { Object.entries(group).map(([colorName, colorData]) => (
                     <li
-                      className={`flex items-center p-1 border-2 rounded ${colorName === result?.name ? 'border-green-500 bg-green-100' : 'border-white'}`}
+                      key={colorName}
+                      className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${colorName === result?.name ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]' : 'border-transparent'}`}
                       title={colorData.description}
                     >
                       <div
