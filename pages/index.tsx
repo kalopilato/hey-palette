@@ -13,11 +13,10 @@ const Home: NextPage = () => {
   const [result, setResult] = React.useState(null)
   const [validationError, setValidationError] = React.useState(null)
 
-  const onSearchChange = (e) => {
+  React.useEffect(() => {
     if(validationError) setValidationError(null)
     if(result) setResult(null)
-    setSearchedColor(e.target.value)
-  }
+  }, [searchedColor])
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -45,16 +44,19 @@ const Home: NextPage = () => {
       <main className="flex flex-col items-center justify-center flex-1 w-full text-center">
         <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 mt-4 bg-white border-b">
           <form className="block w-10/12" onSubmit={onSubmit}>
-            <label htmlFor="colorInput" className="block text-2xl font-bold text-gray-800">Hey Palette, what color is this?</label>
-            <input
-              id="colorInput"
-              type="text"
-              className="w-48 px-4 py-2 mt-2 text-center text-gray-700 border-2 border-gray-200 rounded focus:outline-none focus:border-gray-300"
-              autocomplete="off"
-              autoFocus
-              placeholder="Enter a color"
-              onChange={onSearchChange}
-            />
+            <div>
+              <label htmlFor="colorInput" className="block text-2xl font-bold text-gray-800">Hey Palette, what color is this?</label>
+              <input
+                id="colorInput"
+                type="text"
+                className="w-48 px-4 py-2 mt-2 text-center text-gray-700 border-2 border-gray-200 rounded focus:outline-none focus:border-gray-300"
+                autocomplete="off"
+                autoFocus
+                placeholder="Enter a color"
+                onChange={(e) => { setSearchedColor(e.target.value) }}
+              />
+              <button type="submit" className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900">Find</button>
+            </div>
             <div className="h-4 pt-2 mb-2 italic">
               {validationError ? (
                 <span className="text-red-500">{validationError}</span>
