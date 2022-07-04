@@ -115,7 +115,7 @@ const Home: NextPage = () => {
                             ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]'
                             : 'border-transparent'
                         }`}
-                        title={colorData.description}
+                        title={`${colorData.description} (${colorData.value})`}
                       >
                         <div
                           className="mr-8 rounded"
