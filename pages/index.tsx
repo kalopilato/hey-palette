@@ -33,7 +33,7 @@ const Home: NextPage = () => {
     setResult(null)
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (searchedColor === '') {

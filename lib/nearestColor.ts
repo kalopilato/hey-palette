@@ -1,6 +1,9 @@
 import nearestColor from 'nearest-color'
 import type { PaletteColor } from './palette'
-import { paletteValuesMappedByName } from './palette'
+import {
+  paletteValuesMappedByName,
+  paletteObjectsMappedByName,
+} from './palette'
 
 type RGB = {
   r: number
@@ -26,10 +29,10 @@ const nearestColorFromPalette = nearestColor.from(paletteValuesMappedByName)
  */
 const findNearestColor = (colorString: string): NearestColorResult => {
   const result = nearestColorFromPalette(colorString)
-  const colorData = paletteValuesMappedByName[result.name]
+  const colorData = paletteObjectsMappedByName[result.name]
 
   return { ...colorData, ...result }
 }
 
 export default findNearestColor
-export { NearestColorResult }
+export type { NearestColorResult }

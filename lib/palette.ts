@@ -1,4 +1,4 @@
-import colorTokens from '../data/color-tokens'
+import colorTokens from '../data/color-tokens.json'
 
 type PaletteColor = {
   value: string
@@ -6,9 +6,21 @@ type PaletteColor = {
   description: string
 }
 
+type PaletteMap = {
+  [key: string]: PaletteColor
+}
+
+type GroupedPaletteMap = {
+  [key: string]: PaletteMap
+}
+
+type StringMap = {
+  [key: string]: string
+}
+
 const palette = colorTokens.global
 
-const paletteValuesMappedByName = Object.entries(palette).reduce(
+const paletteValuesMappedByName: StringMap = Object.entries(palette).reduce(
   (acc, entry) => {
     const [name, data] = entry
     return { ...acc, [name]: data.value }
@@ -16,7 +28,7 @@ const paletteValuesMappedByName = Object.entries(palette).reduce(
   {}
 )
 
-const paletteObjectsMappedByName = Object.entries(palette).reduce(
+const paletteObjectsMappedByName: PaletteMap = Object.entries(palette).reduce(
   (acc, entry) => {
     const [name, data] = entry
     return { ...acc, [name]: data }
@@ -26,7 +38,7 @@ const paletteObjectsMappedByName = Object.entries(palette).reduce(
 
 const paletteObjectsGroupedByName = Object.entries(
   paletteObjectsMappedByName
-).reduce((acc, entry) => {
+).reduce((acc: GroupedPaletteMap, entry: [string, PaletteColor]) => {
   const [name, value] = entry
   const groupName = name.split('-')[0]
 
@@ -35,10 +47,12 @@ const paletteObjectsGroupedByName = Object.entries(
 
   return acc
 }, {})
-export const APP_PALETTE = paletteObjectsGroupedByName
+
 export default palette
+
+export type { PaletteColor }
+
 export {
-  PaletteColor,
   paletteValuesMappedByName,
   paletteObjectsMappedByName,
   paletteObjectsGroupedByName,
