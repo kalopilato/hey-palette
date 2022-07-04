@@ -61,13 +61,13 @@ const Home: NextPage = () => {
             <div>
               <label
                 htmlFor="colorInput"
-                className="block text-2xl font-bold text-gray-800"
+                className="block text-xl font-bold text-gray-800 md:text-2xl"
               >
                 Hey Palette, what color is this?
               </label>
               <input
                 id="colorInput"
-                type="text"
+                type="search"
                 className="w-48 px-4 py-2 mt-2 text-center text-gray-700 border-2 border-gray-200 rounded focus:outline-none focus:border-gray-300"
                 autoComplete="off"
                 autoFocus
@@ -82,20 +82,13 @@ const Home: NextPage = () => {
               >
                 Find
               </button>
-              <button
-                type="reset"
-                onClick={reset}
-                className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900"
-              >
-                Reset
-              </button>
             </div>
             <div className="h-4 pt-2 mb-2 italic">
               {validationError ? (
                 <span className="text-red-500">{validationError}</span>
               ) : null}
               {result ? (
-                <span className="font-semibold text-gray-700">{`Nearest color: "${result.name}". Distance: ${result.distance}`}</span>
+                <span className="font-semibold text-gray-700">{`Nearest color: "${result.name}"`}</span>
               ) : null}
             </div>
           </form>
@@ -114,9 +107,9 @@ const Home: NextPage = () => {
                       <li
                         id={colorName}
                         key={colorName}
-                        className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${
+                        className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 scroll-mt-56 ${
                           colorName === result?.name
-                            ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)] scroll-mt-56'
+                            ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]'
                             : 'border-transparent'
                         }`}
                         title={colorData.description}
