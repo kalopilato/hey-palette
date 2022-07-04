@@ -1,17 +1,18 @@
 import type { NextPage } from 'next'
 
 import nearestColor from '../lib/nearestColor'
+import type { NearestColorResult } from '../lib/nearestColor'
 import { paletteObjectsGroupedByName } from '../lib/palette'
-import { toSentenceCase } from '../lib/stringUtils'
+import { sentenceCase } from '../lib/stringUtils'
 
 import React from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
+import Image from 'next/image';
 
 const Home: NextPage = () => {
-  const [searchedColor, setSearchedColor] = React.useState('')
-  const [result, setResult] = React.useState(null)
-  const [validationError, setValidationError] = React.useState(null)
+  const [searchedColor, setSearchedColor] = React.useState<String>('')
+  const [result, setResult] = React.useState<NearestColorResult | null>(null)
+  const [validationError, setValidationError] = React.useState<String | null>(null)
 
   React.useEffect(() => {
     if(validationError) setValidationError(null)
@@ -71,8 +72,8 @@ const Home: NextPage = () => {
         <div className="flex w-10/12 my-8">
           <div className="flex flex-wrap justify-center w-full gap-x-16 gap-y-8">
             { Object.entries(paletteObjectsGroupedByName).map(([groupName, group]) => (
-              <div className="w-48">
-                <h3 className="mb-2 text-lg font-semibold">{toSentenceCase(groupName)}</h3>
+              <div key={groupName} className="w-48">
+                <h3 className="mb-2 text-lg font-semibold">{sentenceCase(groupName)}</h3>
                 <ol>
                   { Object.entries(group).map(([colorName, colorData]) => (
                     <li

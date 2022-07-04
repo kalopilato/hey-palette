@@ -1,5 +1,11 @@
 import colorTokens from '../data/color-tokens'
 
+type PaletteColor = {
+  value: String,
+  type: String,
+  description: String
+}
+
 const palette = colorTokens.global
 
 const paletteValuesMappedByName = Object.entries(palette).reduce((acc, entry) => {
@@ -24,6 +30,7 @@ const paletteObjectsGroupedByName = Object.entries(paletteObjectsMappedByName).r
 
 export default palette
 export {
+  PaletteColor,
   paletteValuesMappedByName,
   paletteObjectsMappedByName,
   paletteObjectsGroupedByName
