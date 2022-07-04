@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 import nearestColor from '../lib/nearestColor'
 import type { NearestColorResult } from '../lib/nearestColor'
@@ -10,14 +11,26 @@ import Head from 'next/head'
 import Image from 'next/image';
 
 const Home: NextPage = () => {
+  const router = useRouter()
+
   const [searchedColor, setSearchedColor] = React.useState<String>('')
   const [result, setResult] = React.useState<NearestColorResult | null>(null)
   const [validationError, setValidationError] = React.useState<String | null>(null)
 
   React.useEffect(() => {
-    if(validationError) setValidationError(null)
-    if(result) setResult(null)
+    reset()
   }, [searchedColor])
+
+  React.useEffect(() => {
+    if(result) {
+      router.push(`#${result.name}`)
+    }
+  }, [result])
+
+  const reset = () => {
+    setValidationError(null)
+    setResult(null)
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -57,6 +70,7 @@ const Home: NextPage = () => {
                 onChange={(e) => { setSearchedColor(e.target.value) }}
               />
               <button type="submit" className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900">Find</button>
+              <button type="reset" onClick={reset} className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900">Reset</button>
             </div>
             <div className="h-4 pt-2 mb-2 italic">
               {validationError ? (
@@ -77,8 +91,9 @@ const Home: NextPage = () => {
                 <ol>
                   { Object.entries(group).map(([colorName, colorData]) => (
                     <li
+                      id={colorName}
                       key={colorName}
-                      className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${colorName === result?.name ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]' : 'border-transparent'}`}
+                      className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${colorName === result?.name ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)] scroll-mt-56' : 'border-transparent'}`}
                       title={colorData.description}
                     >
                       <div
