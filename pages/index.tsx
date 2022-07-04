@@ -22,12 +22,6 @@ const Home: NextPage = () => {
     reset()
   }, [searchedColor])
 
-  React.useEffect(() => {
-    if (result) {
-      router.push(`#${result.name}`)
-    }
-  }, [result, router])
-
   const reset = () => {
     setValidationError(null)
     setResult(null)
@@ -37,12 +31,16 @@ const Home: NextPage = () => {
     e.preventDefault()
 
     if (searchedColor === '') {
+      reset()
+      router.push('/')
       setValidationError('Maybe enter something first?')
       return
     }
 
     try {
-      setResult(nearestColor(searchedColor))
+      const nearestColorResult = nearestColor(searchedColor)
+      setResult(nearestColorResult)
+      router.push(`#${nearestColorResult.name}`)
     } catch (e) {
       setValidationError('I only know about HEX or RGB colors sorry!')
     }
