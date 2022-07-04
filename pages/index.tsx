@@ -1,31 +1,32 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-import nearestColor from '../lib/nearestColor'
 import type { NearestColorResult } from '../lib/nearestColor'
+import nearestColor from '../lib/nearestColor'
 import { paletteObjectsGroupedByName } from '../lib/palette'
 import { sentenceCase } from '../lib/stringUtils'
 
 import React from 'react'
 import Head from 'next/head'
-import Image from 'next/image';
 
 const Home: NextPage = () => {
   const router = useRouter()
 
-  const [searchedColor, setSearchedColor] = React.useState<String>('')
+  const [searchedColor, setSearchedColor] = React.useState<string>('')
   const [result, setResult] = React.useState<NearestColorResult | null>(null)
-  const [validationError, setValidationError] = React.useState<String | null>(null)
+  const [validationError, setValidationError] = React.useState<string | null>(
+    null
+  )
 
   React.useEffect(() => {
     reset()
   }, [searchedColor])
 
   React.useEffect(() => {
-    if(result) {
+    if (result) {
       router.push(`#${result.name}`)
     }
-  }, [result])
+  }, [result, router])
 
   const reset = () => {
     setValidationError(null)
@@ -35,13 +36,12 @@ const Home: NextPage = () => {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    if(searchedColor === '') {
+    if (searchedColor === '') {
       setValidationError('Maybe enter something first?')
       return
     }
 
     try {
-      const searchResult = nearestColor(searchedColor)
       setResult(nearestColor(searchedColor))
     } catch (e) {
       setValidationError('I only know about HEX or RGB colors sorry!')
@@ -59,18 +59,36 @@ const Home: NextPage = () => {
         <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 mt-4 bg-white border-b">
           <form className="block w-10/12" onSubmit={onSubmit}>
             <div>
-              <label htmlFor="colorInput" className="block text-2xl font-bold text-gray-800">Hey Palette, what color is this?</label>
+              <label
+                htmlFor="colorInput"
+                className="block text-2xl font-bold text-gray-800"
+              >
+                Hey Palette, what color is this?
+              </label>
               <input
                 id="colorInput"
                 type="text"
                 className="w-48 px-4 py-2 mt-2 text-center text-gray-700 border-2 border-gray-200 rounded focus:outline-none focus:border-gray-300"
-                autocomplete="off"
+                autoComplete="off"
                 autoFocus
                 placeholder="Enter a color"
-                onChange={(e) => { setSearchedColor(e.target.value) }}
+                onChange={(e) => {
+                  setSearchedColor(e.target.value)
+                }}
               />
-              <button type="submit" className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900">Find</button>
-              <button type="reset" onClick={reset} className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900">Reset</button>
+              <button
+                type="submit"
+                className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900"
+              >
+                Find
+              </button>
+              <button
+                type="reset"
+                onClick={reset}
+                className="px-4 py-2 ml-4 text-gray-700 bg-gray-100 border-2 border-gray-300 rounded hover:border-gray-400 hover:bg-gray-100 hover:text-gray-900"
+              >
+                Reset
+              </button>
             </div>
             <div className="h-4 pt-2 mb-2 italic">
               {validationError ? (
@@ -85,27 +103,40 @@ const Home: NextPage = () => {
 
         <div className="flex w-10/12 my-8">
           <div className="flex flex-wrap justify-center w-full gap-x-16 gap-y-8">
-            { Object.entries(paletteObjectsGroupedByName).map(([groupName, group]) => (
-              <div key={groupName} className="w-48">
-                <h3 className="mb-2 text-lg font-semibold">{sentenceCase(groupName)}</h3>
-                <ol>
-                  { Object.entries(group).map(([colorName, colorData]) => (
-                    <li
-                      id={colorName}
-                      key={colorName}
-                      className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${colorName === result?.name ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)] scroll-mt-56' : 'border-transparent'}`}
-                      title={colorData.description}
-                    >
-                      <div
-                        className="mr-8 rounded"
-                        style={{backgroundColor: colorData.value, width: '3rem', height: '2rem', border: '1px solid black'}}
-                      />
-                      <span>{colorName}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            ))}
+            {Object.entries(paletteObjectsGroupedByName).map(
+              ([groupName, group]) => (
+                <div key={groupName} className="w-48">
+                  <h3 className="mb-2 text-lg font-semibold">
+                    {sentenceCase(groupName)}
+                  </h3>
+                  <ol>
+                    {Object.entries(group).map(([colorName, colorData]) => (
+                      <li
+                        id={colorName}
+                        key={colorName}
+                        className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 ${
+                          colorName === result?.name
+                            ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)] scroll-mt-56'
+                            : 'border-transparent'
+                        }`}
+                        title={colorData.description}
+                      >
+                        <div
+                          className="mr-8 rounded"
+                          style={{
+                            backgroundColor: colorData.value,
+                            width: '3rem',
+                            height: '2rem',
+                            border: '1px solid black',
+                          }}
+                        />
+                        <span>{colorName}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )
+            )}
           </div>
         </div>
       </main>
