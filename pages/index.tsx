@@ -5,7 +5,7 @@ import type { NearestColorResult } from '../lib/nearestColor'
 import nearestColor from '../lib/nearestColor'
 import { paletteObjectsGroupedByName } from '../lib/palette'
 import { sentenceCase } from '../lib/stringUtils'
-
+import { copyTextToClipboard } from '../lib/clipboard'
 import React from 'react'
 import Head from 'next/head'
 
@@ -25,6 +25,11 @@ const Home: NextPage = () => {
   const reset = () => {
     setValidationError(null)
     setResult(null)
+  }
+
+  const handleSwatchClick = async (colorValue: string) => {
+    await copyTextToClipboard(colorValue)
+    alert(`Copied ${colorValue} to clipboard`)
   }
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -119,6 +124,9 @@ const Home: NextPage = () => {
                             width: '3rem',
                             height: '2rem',
                             border: '1px solid black',
+                          }}
+                          onClick={() => {
+                            handleSwatchClick(colorData.value)
                           }}
                         />
                         <span>{colorName}</span>
