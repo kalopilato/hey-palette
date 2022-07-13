@@ -118,7 +118,7 @@ const Home: NextPage = () => {
                         title={`${colorData.description} (${colorData.value})`}
                       >
                         <div
-                          className="mr-8 rounded"
+                          className="mr-8 rounded cursor-pointer"
                           style={{
                             backgroundColor: colorData.value,
                             width: '3rem',
