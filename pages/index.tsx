@@ -32,6 +32,13 @@ const Home: NextPage = () => {
     alert(`Copied ${colorValue} to clipboard`)
   }
 
+  const handleColorNameClick = async (colorName: string) => {
+    const colorVariableString = `var(--${colorName})`
+
+    await copyTextToClipboard(colorVariableString)
+    alert(`Copied ${colorVariableString} to clipboard`)
+  }
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -129,7 +136,14 @@ const Home: NextPage = () => {
                             handleSwatchClick(colorData.value)
                           }}
                         />
-                        <span>{colorName}</span>
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => {
+                            handleColorNameClick(colorName)
+                          }}
+                        >
+                          {colorName}
+                        </span>
                       </li>
                     ))}
                   </ol>
