@@ -33,6 +33,8 @@ const Home: NextPage = () => {
   }
 
   const handleColorNameClick = async (colorName: string) => {
+    // It's a little weird to reformat the string before writing to clipboard but this is
+    // how we define the palette in CSS Custom Properties so why not 🤷‍♂️
     const colorVariableString = `var(--${colorName})`
 
     await copyTextToClipboard(colorVariableString)
@@ -117,33 +119,36 @@ const Home: NextPage = () => {
                       <li
                         id={colorName}
                         key={colorName}
-                        className={`flex items-center p-1 bg-white border rounded transition ease-in-out duration-125 scroll-mt-56 ${
+                        className={`p-1 bg-white border rounded transition ease-in-out duration-125 scroll-mt-56 ${
                           colorName === result?.name
                             ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]'
                             : 'border-transparent'
                         }`}
                         title={`${colorData.description} (${colorData.value})`}
                       >
-                        <div
-                          className="mr-8 rounded cursor-pointer"
-                          style={{
-                            backgroundColor: colorData.value,
-                            width: '3rem',
-                            height: '2rem',
-                            border: '1px solid black',
-                          }}
-                          onClick={() => {
-                            handleSwatchClick(colorData.value)
-                          }}
-                        />
-                        <span
-                          className="cursor-pointer"
-                          onClick={() => {
-                            handleColorNameClick(colorName)
-                          }}
-                        >
-                          {colorName}
-                        </span>
+                        <div className="flex items-center">
+                          <div
+                            className="w-12 h-8 mr-8 border border-black rounded cursor-pointer"
+                            style={{ backgroundColor: colorData.value }}
+                            onClick={() => handleSwatchClick(colorData.value)}
+                          />
+                          <span
+                            className="cursor-pointer"
+                            onClick={() => handleColorNameClick(colorName)}
+                          >
+                            {colorName}
+                          </span>
+                        </div>
+                        {colorName === result?.name && (
+                          <div className="flex items-center pt-1 mt-1 border-0 border-t">
+                            <div
+                              className="w-12 h-8 mr-8 border border-black rounded cursor-pointer"
+                              style={{ backgroundColor: searchedColor }}
+                              onClick={() => handleSwatchClick(searchedColor)}
+                            />
+                            <span>{searchedColor}</span>
+                          </div>
+                        )}
                       </li>
                     ))}
                   </ol>
