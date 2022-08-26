@@ -2,7 +2,9 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import type { NearestColorResult } from '../lib/nearestColor'
-import nearestColor from '../lib/nearestColor'
+import nearestColor, {
+  resultDistanceToMatchPercentage,
+} from '../lib/nearestColor'
 import { paletteObjectsGroupedByName } from '../lib/palette'
 import { sentenceCase } from '../lib/stringUtils'
 import { copyTextToClipboard } from '../lib/clipboard'
@@ -60,6 +62,14 @@ const Home: NextPage = () => {
     }
   }
 
+  const resultMatchPercentage = result
+    ? resultDistanceToMatchPercentage(result.distance)
+    : 0
+  const resultMatchPercentageText =
+    resultMatchPercentage === 100
+      ? 'exact match'
+      : `${resultMatchPercentage.toFixed(2)}% match`
+
   return (
     <div className="min-h-screen">
       <Head>
@@ -100,7 +110,7 @@ const Home: NextPage = () => {
                 <span className="text-red-500">{validationError}</span>
               ) : null}
               {result ? (
-                <span className="font-semibold text-gray-700">{`Nearest color: "${result.name}"`}</span>
+                <span className="font-semibold text-gray-500">{`Nearest color: "${result.name}" (${resultMatchPercentageText})`}</span>
               ) : null}
             </div>
           </form>
@@ -124,9 +134,16 @@ const Home: NextPage = () => {
                             ? 'scale-150 shadow-[0_25px_50px_-12px_rgb(0,0,0)]'
                             : 'border-transparent'
                         }`}
-                        title={`${colorData.description} (${colorData.value})`}
                       >
-                        <div className="flex items-center">
+                        {colorName === result?.name && (
+                          <div className="mb-1 italic text-gray-500">
+                            {resultMatchPercentageText}
+                          </div>
+                        )}
+                        <div
+                          className="flex items-center"
+                          title={`${colorData.description} (${colorData.value})`}
+                        >
                           <div
                             className="w-12 h-8 mr-8 border border-black rounded cursor-pointer"
                             style={{ backgroundColor: colorData.value }}
@@ -146,7 +163,9 @@ const Home: NextPage = () => {
                               style={{ backgroundColor: searchedColor }}
                               onClick={() => handleSwatchClick(searchedColor)}
                             />
-                            <span>{searchedColor}</span>
+                            <span className="italic text-gray-500">
+                              {searchedColor}
+                            </span>
                           </div>
                         )}
                       </li>
