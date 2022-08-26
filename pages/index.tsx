@@ -11,6 +11,8 @@ import { copyTextToClipboard } from '../lib/clipboard'
 import React from 'react'
 import Head from 'next/head'
 
+const validHexWithoutHashRegex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
+
 const Home: NextPage = () => {
   const router = useRouter()
 
@@ -69,6 +71,13 @@ const Home: NextPage = () => {
     resultMatchPercentage === 100
       ? 'exact match'
       : `${resultMatchPercentage.toFixed(2)}% match`
+
+  // The `nearest-color` library accepts a hex value _without_ the leading # when
+  // searching for the nearest match, which is nice from a user experience perspective,
+  // but not valid when we use it for styling purposes, so we'll patch it up here.
+  const validColorFromSearch = validHexWithoutHashRegex.test(searchedColor)
+    ? `#${searchedColor}`
+    : searchedColor
 
   return (
     <div className="min-h-screen">
@@ -160,11 +169,13 @@ const Home: NextPage = () => {
                           <div className="flex items-center pt-1 mt-1 border-0 border-t">
                             <div
                               className="w-12 h-8 mr-8 border border-black rounded cursor-pointer"
-                              style={{ backgroundColor: searchedColor }}
-                              onClick={() => handleSwatchClick(searchedColor)}
+                              style={{ backgroundColor: validColorFromSearch }}
+                              onClick={() =>
+                                handleSwatchClick(validColorFromSearch)
+                              }
                             />
                             <span className="italic text-gray-500">
-                              {searchedColor}
+                              {validColorFromSearch}
                             </span>
                           </div>
                         )}
