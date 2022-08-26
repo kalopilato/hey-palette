@@ -34,5 +34,17 @@ const findNearestColor = (colorString: string): NearestColorResult => {
   return { ...colorData, ...result }
 }
 
+/**
+ * Converts the `distance` value from the nearestColor result to a percentage match
+ * @param distance the distance value returned by findNearestColor
+ * @returns the percentage match as a number between 0 and 100
+ */
+const resultDistanceToMatchPercentage = (distance: number): number => {
+  // This const was determined by using the `nearest-color` library to compare #000 to #fff and taking its `distance` value
+  const maxResultDistance = 441.6729559300637
+  return 100 - (distance / maxResultDistance) * 100
+}
+
 export default findNearestColor
+export { resultDistanceToMatchPercentage }
 export type { NearestColorResult }
