@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
+import githubIcon from '@iconify/icons-simple-icons/github'
 import type { NearestColorResult } from '../lib/nearestColor'
 import nearestColor, {
   resultDistanceToMatchPercentage,
@@ -8,8 +9,10 @@ import nearestColor, {
 import { paletteObjectsGroupedByName } from '../lib/palette'
 import { sentenceCase } from '../lib/stringUtils'
 import { copyTextToClipboard } from '../lib/clipboard'
+
 import React from 'react'
 import Head from 'next/head'
+import { Icon } from '@iconify/react'
 
 const validHexWithoutHashRegex = /^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/
 
@@ -80,14 +83,14 @@ const Home: NextPage = () => {
     : searchedColor
 
   return (
-    <div className="min-h-screen">
+    <div className="flex flex-col justify-between min-h-screen">
       <Head>
         <title>Hey Palette</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center flex-1 w-full text-center">
-        <header className="sticky top-0 flex flex-col items-center justify-center w-full py-4 mt-4 bg-white border-b">
+      <main className="flex flex-col items-center flex-1 w-full text-center">
+        <header className="sticky top-0 flex flex-col items-center justify-center w-full pt-8 pb-4 bg-white border-b">
           <form className="block w-10/12" onSubmit={onSubmit}>
             <div>
               <label
@@ -188,6 +191,17 @@ const Home: NextPage = () => {
           </div>
         </div>
       </main>
+
+      <footer className="flex justify-center w-full py-6">
+        <a href="https://github.com/kalopilato/hey-palette">
+          <Icon
+            className="text-gray-400"
+            icon={githubIcon}
+            width="2rem"
+            height="2rem"
+          />
+        </a>
+      </footer>
     </div>
   )
 }
