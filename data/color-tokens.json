@@ -31,7 +31,7 @@
       "description": "Gray base"
     },
     "blue-200": {
-      "value": "#EFF9FF",
+      "value": "#BFEDFF",
       "type": "color",
       "description": "Pale blue"
     },
@@ -134,6 +134,11 @@
       "value": "#FAFDFA",
       "type": "color",
       "description": "Pale green"
+    },
+    "green-200": {
+      "value": "#E2FBE6",
+      "type": "color",
+      "description": ""
     },
     "green-400": {
       "value": "#2ECC40",
