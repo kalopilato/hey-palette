@@ -240,6 +240,10 @@
       "type": "color",
       "description": "Pale red"
     },
+    "red-300": {
+      "value": "#FFCCDD",
+      "type": "color"
+    },
     "red-500": {
       "value": "#F83F23",
       "type": "color",
