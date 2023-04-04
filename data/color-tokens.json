@@ -40,6 +40,10 @@
       "type": "color",
       "description": "Aqua"
     },
+    "blue-500": {
+      "value": "#0033FF",
+      "type": "color"
+    },
     "blue-600": {
       "value": "#337ab7",
       "type": "color",
