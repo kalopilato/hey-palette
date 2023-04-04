@@ -154,7 +154,7 @@ const Home: NextPage = () => {
                         )}
                         <div
                           className="flex items-center"
-                          title={`${colorData.description} (${colorData.value})`}
+                          title={`${colorData.value}`}
                         >
                           <div
                             className="w-12 h-8 mr-8 border border-black rounded cursor-pointer"

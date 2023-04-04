@@ -2,43 +2,35 @@
   "global": {
     "aqua-200": {
       "value": "#DDFFFA",
-      "type": "color",
-      "description": "Pale aqua"
+      "type": "color"
     },
     "aqua-500": {
       "value": "#6AF0DB",
-      "type": "color",
-      "description": "Aqua"
+      "type": "color"
     },
     "aqua-600": {
       "value": "#39CCCC",
-      "type": "color",
-      "description": "Teal"
+      "type": "color"
     },
     "aqua-800": {
       "value": "#238072",
-      "type": "color",
-      "description": "Dark aqua"
+      "type": "color"
     },
     "base-0": {
       "value": "#FFF",
-      "type": "color",
-      "description": "White"
+      "type": "color"
     },
     "base-1000": {
       "value": "#000",
-      "type": "color",
-      "description": "Gray base"
+      "type": "color"
     },
     "blue-200": {
       "value": "#BFEDFF",
-      "type": "color",
-      "description": "Pale blue"
+      "type": "color"
     },
     "blue-400": {
       "value": "#7FDBFF",
-      "type": "color",
-      "description": "Aqua"
+      "type": "color"
     },
     "blue-500": {
       "value": "#0033FF",
@@ -46,203 +38,163 @@
     },
     "blue-600": {
       "value": "#337ab7",
-      "type": "color",
-      "description": "Blue"
+      "type": "color"
     },
     "blue-700": {
       "value": "#0A568D",
-      "type": "color",
-      "description": "Dark blue"
+      "type": "color"
     },
     "charcoal-300": {
       "value": "#767676",
-      "type": "color",
-      "description": "Dark gray"
+      "type": "color"
     },
     "charcoal-400": {
       "value": "#555555",
-      "type": "color",
-      "description": "Gray"
+      "type": "color"
     },
     "charcoal-500": {
       "value": "#4F4F4F",
-      "type": "color",
-      "description": "Base gray"
+      "type": "color"
     },
     "charcoal-600": {
       "value": "#444444",
-      "type": "color",
-      "description": "Very dark gray"
+      "type": "color"
     },
     "charcoal-700": {
       "value": "#333333",
-      "type": "color",
-      "description": "Dark gray"
+      "type": "color"
     },
     "charcoal-800": {
       "value": "#222222",
-      "type": "color",
-      "description": "Gray darker"
+      "type": "color"
     },
     "charcoal-900": {
       "value": "#111111",
-      "type": "color",
-      "description": "Black"
+      "type": "color"
     },
     "gray-100": {
       "value": "#F8F8F8",
-      "type": "color",
-      "description": "Pale gray"
+      "type": "color"
     },
     "gray-200": {
       "value": "#F5F5F5",
-      "type": "color",
-      "description": "Table bg hover"
+      "type": "color"
     },
     "gray-300": {
       "value": "#EEEEEE",
-      "type": "color",
-      "description": "Gray lighter"
+      "type": "color"
     },
     "gray-400": {
       "value": "#E5E5E5",
-      "type": "color",
-      "description": "Light gray"
+      "type": "color"
     },
     "gray-500": {
       "value": "#DDDDDD",
-      "type": "color",
-      "description": "Gray"
+      "type": "color"
     },
     "gray-600": {
       "value": "#BBBBBB",
-      "type": "color",
-      "description": "Mid gray"
+      "type": "color"
     },
     "gray-700": {
       "value": "#AAAAAA",
-      "type": "color",
-      "description": "Storm gray"
+      "type": "color"
     },
     "gray-800": {
       "value": "#8E8E8E",
-      "type": "color",
-      "description": "Mid gray"
+      "type": "color"
     },
     "gray-900": {
       "value": "#888888",
-      "type": "color",
-      "description": "Bg build scheduled dark"
+      "type": "color"
     },
     "green-100": {
       "value": "#FAFDFA",
-      "type": "color",
-      "description": "Pale green"
+      "type": "color"
     },
     "green-200": {
       "value": "#E2FBE6",
-      "type": "color",
-      "description": ""
+      "type": "color"
     },
     "green-400": {
       "value": "#2ECC40",
-      "type": "color",
-      "description": "Green"
+      "type": "color"
     },
     "green-500": {
       "value": "#00BE13",
-      "type": "color",
-      "description": "Success green"
+      "type": "color"
     },
     "green-700": {
       "value": "#00A110",
-      "type": "color",
-      "description": "Bg build passed dark"
+      "type": "color"
     },
     "lime-200": {
       "value": "#BEEAD8",
-      "type": "color",
-      "description": "Light lime"
+      "type": "color"
     },
     "lime-500": {
       "value": "#14CC80",
-      "type": "color",
-      "description": "Lime"
+      "type": "color"
     },
     "lime-700": {
       "value": "#00BB64",
-      "type": "color",
-      "description": "Dark lime"
+      "type": "color"
     },
     "olive-500": {
       "value": "#3D9970",
-      "type": "color",
-      "description": "Olive"
+      "type": "color"
     },
     "olive-700": {
       "value": "#078573",
-      "type": "color",
-      "description": "Dark green"
+      "type": "color"
     },
     "olive-800": {
       "value": "#0E7868",
-      "type": "color",
-      "description": "Emerald"
+      "type": "color"
     },
     "orange-100": {
       "value": "#FFF8E7",
-      "type": "color",
-      "description": "Pale orange"
+      "type": "color"
     },
     "orange-500": {
       "value": "#FFBA11",
-      "type": "color",
-      "description": "Orange"
+      "type": "color"
     },
     "orange-700": {
       "value": "#FF851B",
-      "type": "color",
-      "description": "Brand warning"
+      "type": "color"
     },
     "pink-200": {
       "value": "#FFEDF9",
-      "type": "color",
-      "description": "Pale pink"
+      "type": "color"
     },
     "pink-400": {
       "value": "#F198D3",
-      "type": "color",
-      "description": "Pink"
+      "type": "color"
     },
     "pink-700": {
       "value": "#921F6B",
-      "type": "color",
-      "description": "Dark pink"
+      "type": "color"
     },
     "pink-800": {
       "value": "#85144B",
-      "type": "color",
-      "description": "Maroon"
+      "type": "color"
     },
     "purple-200": {
       "value": "#F1EFFF",
-      "type": "color",
-      "description": "Pale purple"
+      "type": "color"
     },
     "purple-300": {
       "value": "#A195EF",
-      "type": "color",
-      "description": "Purple"
+      "type": "color"
     },
     "purple-600": {
       "value": "#4B19D5",
-      "type": "color",
-      "description": "Dark purple"
+      "type": "color"
     },
     "red-100": {
       "value": "#FDF5F5",
-      "type": "color",
-      "description": "Pale red"
+      "type": "color"
     },
     "red-300": {
       "value": "#FFCCDD",
@@ -250,43 +202,35 @@
     },
     "red-500": {
       "value": "#F83F23",
-      "type": "color",
-      "description": "Bg build failed"
+      "type": "color"
     },
     "red-600": {
       "value": "#EB130F",
-      "type": "color",
-      "description": "Fail red"
+      "type": "color"
     },
     "red-700": {
       "value": "#DB260A",
-      "type": "color",
-      "description": "Bg build failed dark"
+      "type": "color"
     },
     "slate-100": {
       "value": "#F9FAFB",
-      "type": "color",
-      "description": "Silver"
+      "type": "color"
     },
     "slate-500": {
       "value": "#C2CACE",
-      "type": "color",
-      "description": "Slate"
+      "type": "color"
     },
     "slate-800": {
       "value": "#202632",
-      "type": "color",
-      "description": "Denim"
+      "type": "color"
     },
     "slate-900": {
       "value": "#151921",
-      "type": "color",
-      "description": "Dark denim"
+      "type": "color"
     },
     "yellow-500": {
       "value": "#FFDC00",
-      "type": "color",
-      "description": "Yellow"
+      "type": "color"
     }
   },
   "Alias": {
